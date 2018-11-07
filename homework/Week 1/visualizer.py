@@ -32,8 +32,3 @@ plt.plot(x, y)
 plt.ylim(7, 10)
 plt.ylabel('Average rating')
 plt.show()
-
-
-if __name__ == "__main__":
-    # print(data_dict)
-    pass
