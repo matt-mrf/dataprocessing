@@ -27,11 +27,6 @@ def extract_movies(dom):
     - Runtime (only a number!)
     """
 
-    # ADD YOUR CODE HERE TO EXTRACT THE ABOVE INFORMATION ABOUT THE
-    # HIGHEST RATED MOVIES
-    # NOTE: FOR THIS EXERCISE YOU ARE ALLOWED (BUT NOT REQUIRED) TO IGNORE
-    # UNICODE CHARACTERS AND SIMPLY LEAVE THEM OUT OF THE OUTPUT.
-
     film_containers = dom.find_all('div', class_ = 'lister-item mode-advanced')
 
     movies = []
@@ -90,9 +85,6 @@ def save_csv(outfile, movies):
 
     for movie in movies:
         writer.writerow([movie[0], movie[1], movie[2], movie[3], movie[4]])
-
-
-    # ADD SOME CODE OF YOURSELF HERE TO WRITE THE MOVIES TO DISK
 
 
 def simple_get(url):
