@@ -76,7 +76,7 @@ def plot_graph(gdp_values ,summary):
     PLots charts of the GDP values and of
     the descriptive values of infant mortality
     """
-    # set the y values for the figures
+    # set the values for the figures
     plt1_x = gdp_values
     plt2_y = summary
 
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     # take GDP column
     target = df['GDP ($ per capita) dollars']
 
-    # filtering out outliers that are removed more than
+    # filter out outliers that are removed more than
     # 2 times the standard deviation
     gdp_mean = int(target.mean())
     gdp_sd = int(target.std())
