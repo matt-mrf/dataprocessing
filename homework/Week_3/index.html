@@ -1,0 +1,169 @@
+<!--
+Name: Matthew Finnegan
+Student nr: 10698485
+This script creates a line chart of imported cars in Norway
+link to data: https://www.kaggle.com/dmi3kno/newcarsalesnorway/home
+-->
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Toyota line import numbers</title>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript">
+      var fileName = "norway_cars.json";
+      var txtFile = new XMLHttpRequest();
+      txtFile.onreadystatechange = function() {
+        if (txtFile.readyState === 4 && txtFile.status == 200) {
+          console.log(JSON.parse(txtFile.responseText));
+          var file = JSON.parse(txtFile.responseText);
+        }
+
+        var canvas = document.getElementById('canvas'),
+		    ctx = canvas.getContext('2d'),
+		    width = canvas.width = 800,
+		    height = canvas.height = 600;
+
+        // saving values and keys
+        var xvalues = Object.keys(file);
+        var yvalues = Object.values(file);
+
+        // initialize
+        var dates = []
+
+        // set years to miliseconds
+        for(value in xvalues){
+          var year = xvalues[value]
+          var mydate = new Date(year);
+          dates.push(mydate.getTime())
+        }
+
+        // prepare new object
+        data = {}
+
+        //fill object with converted data
+        var counter = 0
+        for(value in yvalues){
+          var date = dates[counter]
+          data[date] = yvalues[value]
+          counter++
+        }
+
+        // prepare values
+
+        var xMax = Math.max(...dates);
+        var xMin = Math.min(...dates);
+
+        var yMax = Math.max(...yvalues);
+        var yMin = Math.min(...yvalues);
+
+        var xAxes = createTransform([xMin, xMax], [50,width-100])
+        var yAxes = createTransform([yMin, yMax], [50,height-100])
+
+        // Coordinates to start from
+        var xCor1 = xAxes(Object.keys(data)[0])
+        var yCor1 = yAxes(Object.values(data)[0])
+
+
+        // draw x-axis
+        ctx.fillStyle = 'black';
+        ctx.beginPath()
+
+        ctx.moveTo(50, height -50);
+        ctx.lineTo(width-50, height-50);
+        ctx.stroke()
+
+
+        // draw graph
+        ctx.beginPath()
+        ctx.strokeStyle = 'red';
+        ctx.moveTo(xCor1, height-yCor1)
+
+        for(point in data){
+          var x = parseInt(point)
+          var y = data[point]
+          xCor = xAxes(x)
+          yCor = yAxes(y)
+
+          // draw to next point
+          ctx.lineTo(xCor, height - yCor);
+
+          // put down label
+          d = new Date(x).getFullYear()
+          ctx.fillText(d, xCor, height - 40, 25);
+        }
+        ctx.stroke();
+
+        // prepare for drawing tick lines
+        var step = (height-100)/10
+        var yStep = (yMax - yMin)/9
+        var value = yMin
+
+        // draw tick lines
+        ctx.beginPath()
+        ctx.strokeStyle = 'grey';
+
+        for (var i = height - 50; i > 50; i -= step){
+          // from left to right
+          ctx.moveTo(50,i)
+          ctx.lineTo(width-50,i)
+
+          // write down tick values
+          ctx.fillText(parseInt(value), 20, i)
+          value += yStep
+        }
+        ctx.stroke()
+
+        ctx.textAlign="center";
+
+        // title
+        ctx.font="30px Arial";
+        ctx.fillText("Amount of Toyota's imported into Sweden in 2007-2017", width/2, 30)
+
+        // x label
+        ctx.font="15px Arial";
+        ctx.fillText("Years", width/2, height - 10)
+
+        // y label
+        ctx.save();
+        ctx.translate(10,height/2)
+        ctx.rotate((Math.PI/180)*270);
+        ctx.fillText("Amount of cars imported", 0,0)
+        ctx.restore()
+
+
+        function createTransform(domain, range){
+        	// domain is a two-element array of the data bounds [domain_min, domain_max]
+        	// range is a two-element array of the screen bounds [range_min, range_max]
+        	// this gives you two equations to solve:
+        	// range_min = alpha * domain_min + beta
+        	// range_max = alpha * domain_max + beta
+   		    // a solution would be:
+
+          var domain_min = domain[0]
+          var domain_max = domain[1]
+          var range_min = range[0]
+          var range_max = range[1]
+
+          // formulas to calculate the alpha and the beta
+         	var alpha = (range_max - range_min) / (domain_max - domain_min)
+
+          var beta = range_max - alpha * domain_max
+
+
+          // returns the function for the linear transformation (y= a * x + b)
+          return function(x){
+            return alpha * x + beta;
+          }
+        }
+    }
+
+      txtFile.open("GET", fileName);
+      txtFile.send();
+    </script>
+  </body>
+</html>
