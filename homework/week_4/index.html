@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="d3/d3.js"></script>
+    <style>
+      p.test {
+        color : teal;
+      }
+      h3.test {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <svg>
+      <rect x="0" y="0" width="500" height="100"/>
+    </svg>
+    <script type="text/javascript">
+      d3.select("head").append("title").text("Cost of living bar chart")
+      d3.select("body").append("h3").style("color", "blue").text("Matthew Finnegan, 10698485");
+      d3.select("body").append("h2").text("Cost of living per country bar chart");
+      d3.select("body").append("p").text("Bar chart representing cost iof living per country. Data courtesy of: alsidjif")
+      d3.json("data/costs.json").then(function(data)
+      {
+        d3.select("body").selectAll("p")
+        .data(data)
+        .enter()
+        .append("p")
+        .attr("class", "test")
+        .text("New paragraph!");
+      })
+
+    </script>
+  </body>
+</html>
