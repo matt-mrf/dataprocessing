@@ -16,9 +16,9 @@ data = []
 with open(INPUT_CSV) as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        data.append({"Country":row["Country"],
-                     "Ranking":int(row["Ranking"]),
-                     "Cost":int(row["Price Index"])})
+        data.append({"country":row["Country"],
+                     "ranking":int(row["Ranking"]),
+                     "cost":int(row["Price Index"])})
 
 with open(OUTPUT_JSON, 'w') as fp:
         json.dump(data, fp)

@@ -2,33 +2,110 @@
 <html>
   <head>
     <script type="text/javascript" src="d3/d3.js"></script>
+    <script src="d3/d3-tip.js"></script>
     <style>
-      p.test {
-        color : teal;
+      *{
+        margin: 0px 0px;
+        padding: 0px 0px;
       }
-      h3.test {
-        color: red;
+      h3{
+        color: white;
+        background-color: gray;
+        text-align: center;
+        font-size: 30px;
+        font-family: sans-serif;
+        margin: 10px 300px 0px 300px
+      }
+      h2{
+        color: white;
+        background-color: black;
+        text-align: center;
+        font-size: 20px;
+        font-family: sans-serif;
+        margin: 0px 300px
+      }
+      p{
+        font-size: 15px;
+        font-family: sans-serif;
+        text-align: center;
+      }
+      .bar:hover {
+        fill: yellow;
+      }
+      .d3-tip {
+        line-height: 1;
+        font-weight: bold;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border-radius: 2px;
+        }
+      /* Style northward tooltips differently */
+      .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
       }
     </style>
   </head>
   <body>
-    <svg>
-      <rect x="0" y="0" width="500" height="100"/>
-    </svg>
     <script type="text/javascript">
       d3.select("head").append("title").text("Cost of living bar chart")
-      d3.select("body").append("h3").style("color", "blue").text("Matthew Finnegan, 10698485");
+      d3.select("body").append("h3").text("Matthew Finnegan, 10698485");
       d3.select("body").append("h2").text("Cost of living per country bar chart");
-      d3.select("body").append("p").text("Bar chart representing cost iof living per country. Data courtesy of: alsidjif")
-      d3.json("data/costs.json").then(function(data)
+      d3.select("body").append("div")
+      .attr("class", "chart")
+      .style("text-align", "center")
+
+      var w = 1000;
+      var h = 500;
+      var barPadding = 0.5;
+
+      var svg = d3.select(".chart").append("svg")
+      svg.attr("width", w)
+         .attr("height", h);
+
+      d3.json("data/data.json").then(function(data)
       {
-        d3.select("body").selectAll("p")
-        .data(data)
-        .enter()
-        .append("p")
-        .attr("class", "test")
-        .text("New paragraph!");
-      })
+        var tool_tip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([-8, 0])
+        .html(function(d) {
+          return "Country: "+d.country+"<br/>"
+                +"Cost of living : " + d.cost;
+        });
+        svg.call(tool_tip);
+
+        var rects = svg.selectAll("rect")
+                 .data(data)
+                 .enter()
+                 .append("rect")
+                 .attr("class", "bar");
+
+
+        rects.attr("x", function(d, i) {
+            return i * (w / data.length)
+         })
+        .attr("y", function(d,i){
+          return h - d.cost*1.5;
+        })
+        .attr("height", function(d, i) {
+            return d.cost * 1.5;
+         })
+        .attr("width", w / data.length - barPadding)
+        .attr("fill", function(d) {
+            return "rgb(100, 0, " + (d.cost) + ")";
+          })
+        .on('mouseover', tool_tip.show)
+        .on('mouseout', tool_tip.hide);
+
+    });
+
+    d3.select("body").append("p")
+    .text("Source: ")
+    .append("a")
+    .attr("href", "https://www.kaggle.com/andresionek/cost-of-living-per-country")
+    .text("Kaggle")
 
     </script>
   </body>
