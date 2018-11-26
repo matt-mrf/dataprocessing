@@ -30,6 +30,12 @@
         font-family: sans-serif;
         text-align: center;
       }
+      .axis {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+      }
+
       .bar:hover {
         fill: yellow;
       }
@@ -52,6 +58,8 @@
 
 <body>
   <script type="text/javascript">
+    var domain = [64, 293]
+
     d3.select("head").append("title").text("Cost of living bar chart")
     d3.select("body").append("h3").text("Matthew Finnegan, 10698485");
     d3.select("body").append("h2").html("Cost of living bar chart" +
@@ -62,10 +70,11 @@
 
     var w = 1000;
     var h = 500;
+    padding = 40;
     var barPadding = 0.5;
 
     var svg = d3.select(".chart").append("svg")
-    svg.attr("width", w)
+      .attr("width", w)
       .attr("height", h);
 
     d3.json("data/data.json").then(function(data) {
@@ -78,6 +87,17 @@
         });
       svg.call(tool_tip);
 
+      var n = 109 // amount of data points
+
+      var yScale = d3.scaleLinear()
+        .domain([64, 293])
+        .range([h, 0]);
+
+      svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate("+padding+",0)")
+        .call(d3.axisLeft(yScale));
+
       var rects = svg.selectAll("rect")
         .data(data)
         .enter()
@@ -86,7 +106,7 @@
 
 
       rects.attr("x", function(d, i) {
-          return i * (w / data.length)
+          return i * ((w-padding) / data.length) + padding
         })
         .attr("y", function(d, i) {
           return h - d.cost * 1.5;
