@@ -54,7 +54,8 @@
   <script type="text/javascript">
     d3.select("head").append("title").text("Cost of living bar chart")
     d3.select("body").append("h3").text("Matthew Finnegan, 10698485");
-    d3.select("body").append("h2").text("Cost of living per country bar chart");
+    d3.select("body").append("h2").html("Cost of living bar chart" +
+      "<br/>" + "listed by price index per country.");
     d3.select("body").append("div")
       .attr("class", "chart")
       .style("text-align", "center")
