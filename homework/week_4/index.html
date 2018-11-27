@@ -57,7 +57,6 @@
 
 <body>
   <script type="text/javascript">
-
     d3.select("head").append("title").text("Cost of living bar chart")
     d3.select("body").append("h3").text("Matthew Finnegan, 10698485");
     d3.select("body").append("h2").html("Cost of living bar chart" +
@@ -70,63 +69,68 @@
     var domain = [0, 293]
     var n = 109 // amount of data points
 
-    var w = 1000;  // width
-    var h = 500;  //height
+    var w = 1000; // width
+    var h = 500; //height
     var xPadding = 40;
     var yPadding = -5
     var barPadding = 0.5;
 
-    var fit = 1.7  // factor so data fits svg accurately
+    var fit = 1.7 // factor so data fits svg accurately
 
+    // append svg element to divs with chart class
     var svg = d3.select(".chart").append("svg")
       .attr("width", w)
       .attr("height", h);
 
     d3.json("data/data.json").then(function(data) {
+      // implement the tool tip
       var tool_tip = d3.tip()
         .attr("class", "d3-tip")
         .offset([-8, 0])
-        .html(function(d) {
+        .html(function(d) { // return what the tool tip will show
           return "Country: " + d.country + "<br/>" +
             "Cost of living : " + d.cost;
         });
       svg.call(tool_tip);
 
-
+      // define the scale for the vertical axis
       var yScale = d3.scaleLinear()
         .domain(domain)
         .range([h, 0]);
 
+      // add y-axis to the SVG with appropriate padding
       svg.append("g")
         .attr("class", "axis")
-        .attr("transform", "translate("+xPadding+","+yPadding+")")
+        .attr("transform", "translate(" + xPadding + "," + yPadding + ")")
         .call(d3.axisLeft(yScale));
 
+      // create a rect element for each datapoint
       var rects = svg.selectAll("rect")
         .data(data)
         .enter()
         .append("rect")
         .attr("class", "bar");
 
-
-      rects.attr("x", function(d, i) {
-          return i * ((w-xPadding) / data.length) + xPadding
-        })
+      // add attributes to the rectangles
+      rects.attr("x", function(d, i) { // determine x with appropriate padding
+          return i * ((w - xPadding) / data.length) + xPadding
+        }) // determine y with appropriate padding
         .attr("y", function(d, i) {
           return h - d.cost * fit + yPadding;
-        })
+        }) // determine height time factor to make fit well
         .attr("height", function(d, i) {
           return d.cost * fit;
-        })
+        }) // determine width using svg width and barPadding
         .attr("width", w / data.length - barPadding)
-        .attr("fill", function(d) {
+        .attr("fill", function(d) { // color in rect
           return "rgb(100, 100, " + (d.cost) + ")";
-        })
+        }) // add tooltip
         .on('mouseover', tool_tip.show)
         .on('mouseout', tool_tip.hide);
 
     });
 
+    // source
     d3.select("body").append("p")
       .text("Source: ")
       .append("a")
