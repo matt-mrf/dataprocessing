@@ -71,7 +71,7 @@
 
     // Magic numbers
     var yDomain = [0, 293]
-    var xDomain = [109, 1]
+    var xDomain = [1, 109]
     var n = 109 // amount of data points
 
     var w = 1000; // width
@@ -103,7 +103,8 @@
         .offset([-8, 0])
         .html(function(d) { // return what the tool tip will show
           return "Country: " + d.country + "<br/>" +
-            "Cost of living : " + d.cost;
+            "Cost of living: " + d.cost + "<br/>" +
+            "Ranking: " + d.ranking;
         });
       svg.call(tool_tip);
 
