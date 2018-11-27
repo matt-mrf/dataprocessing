@@ -3,7 +3,7 @@
 # Student number: 10698485
 """
 This script converts a csv file with
-Toyota import numbers in Norway to json
+cost of living in price index per country to json
 """
 
 import json
