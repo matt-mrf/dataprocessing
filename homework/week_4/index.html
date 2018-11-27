@@ -146,7 +146,7 @@
         }) // determine width using svg width and barPadding
         .attr("width", w / data.length - barPadding)
         .attr("fill", function(d) { // color in rect
-          return "rgb(100, 100, " + (d.cost) + ")";
+          return "rgb("+d.cost/fit+","+d.cost/fit+","+d.cost/fit+")";
         }) // add tooltip
         .on('mouseover', tool_tip.show)
         .on('mouseout', tool_tip.hide);
