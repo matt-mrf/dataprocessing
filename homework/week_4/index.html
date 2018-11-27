@@ -30,6 +30,9 @@
         font-family: sans-serif;
         text-align: center;
       }
+      .chart{
+        margin-top: 10px;
+      }
       .axis {
         fill: none;
         stroke: black;
@@ -60,13 +63,15 @@
     d3.select("head").append("title").text("Cost of living bar chart")
     d3.select("body").append("h3").text("Matthew Finnegan, 10698485");
     d3.select("body").append("h2").html("Cost of living bar chart" +
-      "<br/>" + "listed by price index per country.");
+      "<br/>" + "listed by price index per country." +
+      "<br/>" + "y-axis shows price index, x-axis shows world ranking");
     d3.select("body").append("div")
       .attr("class", "chart")
       .style("text-align", "center")
 
     // Magic numbers
-    var domain = [0, 293]
+    var yDomain = [0, 293]
+    var xDomain = [109, 1]
     var n = 109 // amount of data points
 
     var w = 1000; // width
@@ -76,6 +81,15 @@
     var barPadding = 0.5;
 
     var fit = 1.7 // factor so data fits svg accurately
+
+    // define the scale for the vertical axis
+    var yScale = d3.scaleLinear()
+    .domain(yDomain)
+    .range([h, 0]);
+
+    var xScale = d3.scaleLinear()
+    .domain(xDomain)
+    .range([0, w-xPadding]);
 
     // append svg element to divs with chart class
     var svg = d3.select(".chart").append("svg")
@@ -93,16 +107,18 @@
         });
       svg.call(tool_tip);
 
-      // define the scale for the vertical axis
-      var yScale = d3.scaleLinear()
-        .domain(domain)
-        .range([h, 0]);
 
       // add y-axis to the SVG with appropriate padding
       svg.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(" + xPadding + "," + yPadding + ")")
         .call(d3.axisLeft(yScale));
+
+      // add x-axis to the SVG with appropriate padding
+      svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(" + xPadding + ", 0)")
+        .call(d3.axisBottom(xScale));
 
       // create a rect element for each datapoint
       var rects = svg.selectAll("rect")
