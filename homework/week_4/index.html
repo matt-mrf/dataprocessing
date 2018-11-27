@@ -68,7 +68,7 @@
       .style("text-align", "center")
 
     // Magic numbers
-    var domain = [64, 293]
+    var domain = [0, 293]
     var n = 109 // amount of data points
 
     var w = 1000;  // width
@@ -95,7 +95,7 @@
 
 
       var yScale = d3.scaleLinear()
-        .domain([0, 293])
+        .domain(domain)
         .range([h, 0]);
 
       svg.append("g")
