@@ -73,7 +73,8 @@
 
     var w = 1000;  // width
     var h = 500;  //height
-    var padding = 40;
+    var xPadding = 40;
+    var yPadding = -5
     var barPadding = 0.5;
 
     var fit = 1.7  // factor so data fits svg accurately
@@ -99,7 +100,7 @@
 
       svg.append("g")
         .attr("class", "axis")
-        .attr("transform", "translate("+padding+",0)")
+        .attr("transform", "translate("+xPadding+","+yPadding+")")
         .call(d3.axisLeft(yScale));
 
       var rects = svg.selectAll("rect")
@@ -110,10 +111,10 @@
 
 
       rects.attr("x", function(d, i) {
-          return i * ((w-padding) / data.length) + padding
+          return i * ((w-xPadding) / data.length) + xPadding
         })
         .attr("y", function(d, i) {
-          return h - d.cost * fit;
+          return h - d.cost * fit + yPadding;
         })
         .attr("height", function(d, i) {
           return d.cost * fit;
