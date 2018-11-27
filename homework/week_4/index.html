@@ -35,7 +35,6 @@
         stroke: black;
         shape-rendering: crispEdges;
       }
-
       .bar:hover {
         fill: yellow;
       }
@@ -121,7 +120,7 @@
         })
         .attr("width", w / data.length - barPadding)
         .attr("fill", function(d) {
-          return "rgb(100, 0, " + (d.cost) + ")";
+          return "rgb(100, 100, " + (d.cost) + ")";
         })
         .on('mouseover', tool_tip.show)
         .on('mouseout', tool_tip.hide);
