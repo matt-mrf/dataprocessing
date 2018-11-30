@@ -8,6 +8,21 @@ header{
   background-color: black;
   color: white;
 }
+.dot{
+  stroke: black;
+}
+.dot:hover {
+  fill: yellow;
+  stroke-width: 2px;
+}
 .chart{
   margin-top: 20px;
 }
+.d3-tip {
+  line-height: 1;
+  padding: 2px;
+  background: rgba(0, 0, 0, 0.5);
+  font-family: sans-serif;
+  color: white;
+  border-radius: 2px;
+  }
