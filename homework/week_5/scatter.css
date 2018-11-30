@@ -1,0 +1,13 @@
+/* scatter.css is to style scatter.html
+Matthew Finnegan, 10698485 */
+
+*{
+  margin: 0px;
+}
+header{
+  background-color: black;
+  color: white;
+}
+.chart{
+  margin-top: 20px;
+}
