@@ -202,7 +202,6 @@ window.onload = function() {
         }
       });
     });
-
     // // return the finished product!
     return dataArray;
   }
