@@ -25,7 +25,7 @@ window.onload = function() {
     Netherlands: "224,243,248",
     Portugal: "145,191,219",
     UK: "69,117,180"
-  }
+  };
 
   var svg = appendSVG();
 
@@ -34,6 +34,7 @@ window.onload = function() {
     let response0 = response[0];
     let response1 = response[1];
     var data = transformResponse(response0, response1);
+    console.log(data)
 
     var tool_tip = d3.tip()
       .attr("class", "d3-tip")
@@ -46,11 +47,11 @@ window.onload = function() {
       });
     svg.call(tool_tip);
 
-    let xDomain = getDomain(data, "conf")
-    let yDomain = getDomain(data, "women")
+    let xDomain = getDomain(data, "conf");
+    let yDomain = getDomain(data, "women");
 
-    let xRange = [0, w]
-    let yRange = [h, 0]
+    let xRange = [0, w];
+    let yRange = [h, 0];
 
     let xScale = d3.scaleLinear()
       .domain(xDomain)
@@ -60,9 +61,9 @@ window.onload = function() {
       .domain(yDomain)
       .range(yRange);
 
-    addAxes(margins, xScale, yScale)
+    addAxes(margins, xScale, yScale);
 
-    // create circles for each datapoint
+    // create dots for each datapoint
     let dots = svg.selectAll(".dot")
       .data(data)
       .enter().append("circle")
@@ -72,13 +73,13 @@ window.onload = function() {
       .attr("r", 9)
       .attr("fill", function(d, i) {
         c = d.Country;
-        c = c.split(" ")
+        c = c.split(" ");
 
         if(c[0] == "United"){
-          c[0] = "UK"
+          c[0] = "UK";
         }
 
-        return "rgb(" + countries[c[0]] + ")"
+        return "rgb(" + countries[c[0]] + ")";
       })
       .on('mouseover', tool_tip.show)
       .on('mouseout', tool_tip.hide);
@@ -107,6 +108,60 @@ window.onload = function() {
         return d;
       });
 
+    d3.selectAll(".m")
+    .on("click", function() {
+      var sort = this.getAttribute("value");
+      newData = []
+
+      // create new data array with specified objects to look at
+      data.forEach(function(entry){
+        if(sort == entry.Country){
+          newData.push(entry)
+        }
+        else if(sort == entry.time){
+          newData.push(entry)
+        }
+      });
+
+      let xDomain = getDomain(newData, "conf");
+      let yDomain = getDomain(newData, "women");
+
+      let xRange = [0, w];
+      let yRange = [h, 0];
+
+      let xScale = d3.scaleLinear()
+        .domain(xDomain)
+        .range(xRange);
+
+      let yScale = d3.scaleLinear()
+        .domain(yDomain)
+        .range(yRange);
+
+      addAxes(margins, xScale, yScale);
+
+      // create dots for each datapoint
+      let dots = svg.selectAll(".dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("class", "dot")
+        .attr("cx", d => xScale(d.datapoint.conf))
+        .attr("cy", d => yScale(d.datapoint.women))
+        .attr("r", 9)
+        .attr("fill", function(d, i) {
+          c = d.Country;
+          c = c.split(" ");
+
+          if(c[0] == "United"){
+            c[0] = "UK";
+          }
+
+          return "rgb(" + countries[c[0]] + ")";
+        })
+        .on('mouseover', tool_tip.show)
+        .on('mouseout', tool_tip.hide);
+
+    });
+
   }).catch(function(e) {
     throw (e);
   });
@@ -124,12 +179,12 @@ window.onload = function() {
       .attr("fill", function(d, i) {
         c = d.Country;
         c = c.split(" ")
-        return "rgb(" + countries[c[0]] + ")"
+        return "rgb(" + countries[c[0]] + ")";
       })
       .on('mouseover', tool_tip.show)
       .on('mouseout', tool_tip.hide);
 
-    return dots
+    return dots;
   }
 
   // add the axes
@@ -138,7 +193,7 @@ window.onload = function() {
     svg.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + h + ")")
-      .call(d3.axisBottom(xScale))
+      .call(d3.axisBottom(xScale));
 
     // add y-axis to the SVG with appropriate padding
     svg.append("g")
@@ -209,7 +264,7 @@ window.onload = function() {
   // appends and svg to the body
   function appendSVG() {
     // append svg element to body
-    return d3.select("body").append("svg")
+    return d3.select(".chart").append("svg")
       .attr("width", w + margins.left + margins.right)
       .attr("height", h + margins.top + margins.bottom)
       .append("g")
@@ -220,11 +275,11 @@ window.onload = function() {
   function getDomain(array, value) {
     if (value == "women") {
       domain = d3.extent(array, d => d.datapoint.women);
-      return [domain[0] - 5, domain[1] + 5]
+      return [domain[0] - 5, domain[1] + 5];
     } else if (value == "conf") {
       domain = d3.extent(array, d => d.datapoint.conf);
-      return [domain[0] - 0.5, domain[1] + 0.5]
+      return [domain[0] - 0.5, domain[1] + 0.5];
     }
   }
 
-};
+}
