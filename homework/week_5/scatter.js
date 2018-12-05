@@ -17,7 +17,7 @@ window.onload = function() {
   var w = 1000 - margins.left - margins.right; // width
   var h = 500 - margins.top - margins.bottom; //height
 
-
+  // map countries to colors
   var countries = {
     France: "215,48,39",
     Germany: "252,141,89",
@@ -47,12 +47,14 @@ window.onload = function() {
 
     svg.call(tool_tip);
 
+    // determine domains for both sets
     let xDomain = getDomain(data, "conf");
     let yDomain = getDomain(data, "women");
 
     let xRange = [0, w];
     let yRange = [h, 0];
 
+    // compute the scales
     let xScale = d3.scaleLinear()
       .domain(xDomain)
       .range(xRange);
@@ -66,6 +68,7 @@ window.onload = function() {
     var xAxis = axes[0];
     var yAxis = axes[1];
 
+    // put the axes on the svg
     xAxis.call(d3.axisBottom(xScale));
     yAxis.call(d3.axisLeft(yScale));
 
@@ -82,19 +85,19 @@ window.onload = function() {
       .attr("cy", d => yScale(d.datapoint.women))
       .attr("r", 9)
       .attr("fill", function(d, i) {
+        // fill dot according to country
         c = d.Country;
         c = c.split(" ");
 
         if (c[0] == "United") {
           c[0] = "UK";
         }
-
         return "rgb(" + countries[c[0]] + ")";
       })
       .on('mouseover', tool_tip.show)
       .on('mouseout', tool_tip.hide);
 
-    d3.selectAll(".m")
+    d3.selectAll(".m") // when clicked in dropdown
       .on("click", function() {
         var sort = this.getAttribute("value");
         let newData = []
@@ -112,21 +115,16 @@ window.onload = function() {
           })
         }
 
+        // determine new domains and scales
         let xDomain = getDomain(newData, "conf");
-        let yDomain = getDomain(newData, "women");
 
         let xRange = [0, w];
-        let yRange = [h, 0];
 
         let newXScale = d3.scaleLinear()
           .domain(xDomain)
           .range(xRange);
 
-        let newYScale = d3.scaleLinear()
-          .domain(yDomain)
-          .range(yRange);
-
-        var new_dots = svg.selectAll("circle.dot") // Zou aan de lengte van deze kunnen liggen als vorige 3 is, zijn er maar 3 circle elementen
+        var new_dots = svg.selectAll("circle.dot")
           .data(newData);
 
         new_dots
@@ -137,7 +135,7 @@ window.onload = function() {
           .attr("r", 0)
           .remove();
 
-        // create dots for each datapoint
+        // create dots for eachn new datapoint
         new_dots
           .enter().append("circle")
           .attr("class", "dot")
@@ -152,20 +150,20 @@ window.onload = function() {
           })
           .transition()
           .ease(d3.easeCircleIn)
-          .duration(500)
+          .duration(300)
           .attr("cx", d => newXScale(d.datapoint.conf))
           .attr("cy", d => yScale(d.datapoint.women))
           .attr("r", 9)
 
-          new_dots
+        new_dots
           .on('mouseover', tool_tip.show)
           .on('mouseout', tool_tip.hide)
 
-        xAxis.call(d3.axisBottom(newXScale));
+        xAxis.call(d3.axisBottom(newXScale)); // call new x-axis
 
       });
 
-      addSource()
+    addSource()
 
   }).catch(function(e) {
     throw (e);
@@ -173,12 +171,12 @@ window.onload = function() {
 
   // add the axes
   function getAxes() {
-    // add x-axis to the SVG with appropriate padding
+    // determine x-axis with appropriate padding
     let xAxis = svg.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + h + ")")
 
-    // add y-axis to the SVG with appropriate padding
+    // determine y-axis with appropriate padding
     let yAxis = svg.append("g")
       .attr("class", "axis")
 
@@ -298,9 +296,7 @@ window.onload = function() {
       .attr("x", -230)
       .attr("y", -40)
       .attr("text-anchor", "middle")
-      .attr("transform", function(d) {
-        return "rotate(-90)"
-      })
+      .attr("transform", "rotate(-90)")
       .text("% of women in science from total amount of researchers");
 
     svg.append("text")
