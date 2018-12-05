@@ -1,4 +1,4 @@
- <!--
+<!--
 scatterplot representing data for: xxx
 Matthew Finnegan, 10698485
   -->
@@ -29,29 +29,35 @@ Matthew Finnegan, 10698485
   <p>
     <a href="http://stats.oecd.org/SDMX-JSON/data/HH_DASH/FRA+DEU+KOR+NLD+PRT+GBR.COCONF.A/all?startTime=2007&endTime=2015">Consumer confidence</a>
   </p>
-  <div class="dropdown">
-    <button class="dropbtn">Show by country</button>
-    <div class="dropdown-content">
-      <a class="m" value="France" href="#">France</a>
-      <a class="m" value="Germany" href="#">Germany</a>
-      <a class="m" value="Korea" href="#">Korea</a>
-      <a class="m" value="Netherlands" href="#">Netherlands</a>
-      <a class="m" value="Portugal" href="#">Portugal</a>
-      <a class="m" value="United Kingdom" href="#">UK</a>
+
+  <!-- Source for general dropdown menu:
+       https://www.w3schools.com/howto/howto_css_dropdown.asp
+  -->
+  <div class="menus">
+    <div class="dropdown">
+      <button class="dropbtn">Show by country</button>
+      <div class="dropdown-content">
+        <a class="m" value="France" href="#">France</a>
+        <a class="m" value="Germany" href="#">Germany</a>
+        <a class="m" value="Korea" href="#">Korea</a>
+        <a class="m" value="Netherlands" href="#">Netherlands</a>
+        <a class="m" value="Portugal" href="#">Portugal</a>
+        <a class="m" value="United Kingdom" href="#">UK</a>
+      </div>
     </div>
-  </div>
-  <div class="dropdown">
-    <button class="dropbtn">Show by year</button>
-    <div class="dropdown-content">
-			<a class="m" value="2007" href="#">2007</a>
-				<a class="m" value="2008" href="#">2008</a>
-				<a class="m" value="2009" href="#">2009</a>
-				<a class="m" value="2010" href="#">2010</a>
-  		<a class="m" value="2011" href="#">2011</a>
-     <a class="m" value="2012" href="#">2012</a>
-     <a class="m" value="2013" href="#">2013</a>
-     <a class="m" value="2014" href="#">2014</a>
-     <a class="m" value="2015" href="#">2015</a>
+    <div class="dropdown">
+      <button class="dropbtn">Show by year</button>
+      <div class="dropdown-content">
+        <a class="m" value="2007" href="#">2007</a>
+        <a class="m" value="2008" href="#">2008</a>
+        <a class="m" value="2009" href="#">2009</a>
+        <a class="m" value="2010" href="#">2010</a>
+        <a class="m" value="2011" href="#">2011</a>
+        <a class="m" value="2012" href="#">2012</a>
+        <a class="m" value="2013" href="#">2013</a>
+        <a class="m" value="2014" href="#">2014</a>
+        <a class="m" value="2015" href="#">2015</a>
+      </div>
     </div>
   </div>
   <div class="chart">

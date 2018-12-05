@@ -2,13 +2,20 @@
 // produces a scatter plot
 // Matthew Finnegan, 10698485
 
+// BUGS VOOR WOENSDAG:
+// Data laadt alleen lengte vorige array
+// axes laten verdwijnen
+// labels
+// titel
+// axis op 0
+
 window.onload = function() {
   var womenInScience = "http://stats.oecd.org/SDMX-JSON/data/MSTI_PUB/TH_WRXRS.FRA+DEU+KOR+NLD+PRT+GBR/all?startTime=2007&endTime=2015"
   var consConf = "http://stats.oecd.org/SDMX-JSON/data/HH_DASH/FRA+DEU+KOR+NLD+PRT+GBR.COCONF.A/all?startTime=2007&endTime=2015"
   var requests = [d3.json(womenInScience), d3.json(consConf)];
 
   var margins = {
-    top: 50,
+    top: 40,
     bottom: 20,
     left: 150,
     right: 150
@@ -61,7 +68,29 @@ window.onload = function() {
       .domain(yDomain)
       .range(yRange);
 
-    addAxes(margins, xScale, yScale);
+    let axes = getAxes();
+
+    var xAxis = axes[0];
+    var yAxis = axes[1];
+
+    xAxis.call(d3.axisBottom(xScale));
+    yAxis.call(d3.axisLeft(yScale));
+
+    appendLegend();
+
+    svg.append("text")
+      .attr("class", "xtext")
+      .attr("x", w - margins.right)
+      .attr("y", h - 5)
+      .attr("text-anchor", "middle")
+      .text("Consumer confidence");
+
+    svg.append("text")
+      .attr("class", "ytext")
+      .attr("x", w - margins.right)
+      .attr("y", h - 5)
+      .attr("text-anchor", "middle")
+      .text("% of women in science from total amount of researchers");
 
     // create dots for each datapoint
     let dots = svg.selectAll(".dot")
@@ -75,7 +104,7 @@ window.onload = function() {
         c = d.Country;
         c = c.split(" ");
 
-        if(c[0] == "United"){
+        if (c[0] == "United") {
           c[0] = "UK";
         }
 
@@ -84,121 +113,84 @@ window.onload = function() {
       .on('mouseover', tool_tip.show)
       .on('mouseout', tool_tip.hide);
 
-    var legend = svg.selectAll(".legend")
-      .data(Object.keys(countries))
-      .enter().append("g")
-      .attr("class", "legend")
-      .attr("transform", function(d, i) {
-        return "translate(0," + i * 20 + ")";
-      });
-
-    legend.append("rect")
-      .attr("x", w + 20)
-      .attr("y", 0)
-      .attr("width", 18)
-      .attr("height", 18)
-      .style("fill", function(d, i) {
-        return "rgb(" + Object.values(countries)[i] + ")";
-      });
-
-    legend.append("text")
-      .attr("x", w + 40)
-      .attr("y", 15)
-      .text(function(d) {
-        return d;
-      });
-
     d3.selectAll(".m")
-    .on("click", function() {
-      var sort = this.getAttribute("value");
-      newData = []
+      .on("click", function() {
+        var sort = this.getAttribute("value");
+        let newData = []
 
-      // create new data array with specified objects to look at
-      data.forEach(function(entry){
-        if(sort == entry.Country){
-          newData.push(entry)
-        }
-        else if(sort == entry.time){
-          newData.push(entry)
-        }
-      });
-
-      let xDomain = getDomain(newData, "conf");
-      let yDomain = getDomain(newData, "women");
-
-      let xRange = [0, w];
-      let yRange = [h, 0];
-
-      let xScale = d3.scaleLinear()
-        .domain(xDomain)
-        .range(xRange);
-
-      let yScale = d3.scaleLinear()
-        .domain(yDomain)
-        .range(yRange);
-
-      addAxes(margins, xScale, yScale);
-
-      // create dots for each datapoint
-      let dots = svg.selectAll(".dot")
-        .data(data)
-        .enter().append("circle")
-        .attr("class", "dot")
-        .attr("cx", d => xScale(d.datapoint.conf))
-        .attr("cy", d => yScale(d.datapoint.women))
-        .attr("r", 9)
-        .attr("fill", function(d, i) {
-          c = d.Country;
-          c = c.split(" ");
-
-          if(c[0] == "United"){
-            c[0] = "UK";
+        // create new data array with specified objects to look at
+        data.forEach(function(entry) {
+          if (sort == entry.Country) {
+            newData.push(entry)
+          } else if (sort == entry.time) {
+            newData.push(entry)
           }
+        });
 
-          return "rgb(" + countries[c[0]] + ")";
-        })
-        .on('mouseover', tool_tip.show)
-        .on('mouseout', tool_tip.hide);
+        console.log(newData) // heeft juiste aantal entries...
 
-    });
+        let xDomain = getDomain(newData, "conf");
+        let yDomain = getDomain(newData, "women");
+
+        let xRange = [0, w];
+        let yRange = [h, 0];
+
+        let newXScale = d3.scaleLinear()
+          .domain(xDomain)
+          .range(xRange);
+
+        let newYScale = d3.scaleLinear()
+          .domain(yDomain)
+          .range(yRange);
+
+        var vis = d3.select("#scatterplot");
+        var new_dots = vis.selectAll("circle.dot") // Zou aan de lengte van deze kunnen liggen als vorige 3 is, zijn er maar 3 circle elementen
+          .data(newData);
+
+        new_dots.exit().remove();
+        // create dots for each datapoint
+        new_dots
+          .enter().append("circle")
+          .attr("class", "dot")
+          .merge(new_dots)
+          .attr("fill", function(d, i) {
+            c = d.Country;
+            console.log(d, c);
+            c = c.split(" ");
+            if (c[0] == "United") {
+              c[0] = "UK";
+            }
+            return "rgb(" + countries[c[0]] + ")";
+          })
+          .attr("cx", d => newXScale(d.datapoint.conf))
+          .attr("cy", d => yScale(d.datapoint.women))
+          .attr("r", 9)
+          .on('mouseover', tool_tip.show)
+          .on('mouseout', tool_tip.hide);
+
+        xAxis.call(d3.axisBottom(newXScale));
+
+      });
 
   }).catch(function(e) {
     throw (e);
   });
 
 
-  // create circle elements
-  function makeCircles() {
-    let dots = svg.selectAll(".dot")
-      .data(data)
-      .enter().append("circle")
-      .attr("class", "dot")
-      .attr("cx", d => xScale(d.datapoint.conf))
-      .attr("cy", d => yScale(d.datapoint.women))
-      .attr("r", 9)
-      .attr("fill", function(d, i) {
-        c = d.Country;
-        c = c.split(" ")
-        return "rgb(" + countries[c[0]] + ")";
-      })
-      .on('mouseover', tool_tip.show)
-      .on('mouseout', tool_tip.hide);
-
-    return dots;
-  }
-
   // add the axes
-  function addAxes(margins, xScale, yScale) {
+  function getAxes() {
     // add x-axis to the SVG with appropriate padding
-    svg.append("g")
+    let xAxis = svg.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + h + ")")
-      .call(d3.axisBottom(xScale));
+    // .call(d3.axisBottom(xScale));
 
     // add y-axis to the SVG with appropriate padding
-    svg.append("g")
+    let yAxis = svg.append("g")
       .attr("class", "axis")
-      .call(d3.axisLeft(yScale));
+    // .call(d3.axisLeft(yScale));
+
+    return [xAxis, yAxis]
   }
 
   // preprocess the data
@@ -268,14 +260,41 @@ window.onload = function() {
       .attr("width", w + margins.left + margins.right)
       .attr("height", h + margins.top + margins.bottom)
       .append("g")
+      .attr("id", "scatterplot")
       .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
+  }
+
+  function appendLegend() {
+    var legend = svg.selectAll(".legend")
+      .data(Object.keys(countries))
+      .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) {
+        return "translate(0," + i * 20 + ")";
+      });
+
+    legend.append("rect")
+      .attr("x", w + 20)
+      .attr("y", 0)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", function(d, i) {
+        return "rgb(" + Object.values(countries)[i] + ")";
+      });
+
+    legend.append("text")
+      .attr("x", w + 40)
+      .attr("y", 15)
+      .text(function(d) {
+        return d;
+      });
   }
 
   // gets the domain for required data
   function getDomain(array, value) {
     if (value == "women") {
       domain = d3.extent(array, d => d.datapoint.women);
-      return [domain[0] - 5, domain[1] + 5];
+      return [0, domain[1] + 5];
     } else if (value == "conf") {
       domain = d3.extent(array, d => d.datapoint.conf);
       return [domain[0] - 0.5, domain[1] + 0.5];
