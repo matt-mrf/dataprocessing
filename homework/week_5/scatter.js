@@ -2,13 +2,6 @@
 // produces a scatter plot
 // Matthew Finnegan, 10698485
 
-// BUGS VOOR WOENSDAG:
-// Data laadt alleen lengte vorige array
-// axes laten verdwijnen
-// labels
-// titel
-// axis op 0
-
 window.onload = function() {
   var womenInScience = "http://stats.oecd.org/SDMX-JSON/data/MSTI_PUB/TH_WRXRS.FRA+DEU+KOR+NLD+PRT+GBR/all?startTime=2007&endTime=2015"
   var consConf = "http://stats.oecd.org/SDMX-JSON/data/HH_DASH/FRA+DEU+KOR+NLD+PRT+GBR.COCONF.A/all?startTime=2007&endTime=2015"
@@ -41,7 +34,6 @@ window.onload = function() {
     let response0 = response[0];
     let response1 = response[1];
     var data = transformResponse(response0, response1);
-    console.log(data)
 
     var tool_tip = d3.tip()
       .attr("class", "d3-tip")
@@ -52,6 +44,7 @@ window.onload = function() {
           "Consumer confidence: " + d.datapoint.conf + "<br/>" +
           "Year: " + d.time;
       });
+
     svg.call(tool_tip);
 
     let xDomain = getDomain(data, "conf");
@@ -78,19 +71,7 @@ window.onload = function() {
 
     appendLegend();
 
-    svg.append("text")
-      .attr("class", "xtext")
-      .attr("x", w - margins.right)
-      .attr("y", h - 5)
-      .attr("text-anchor", "middle")
-      .text("Consumer confidence");
-
-    svg.append("text")
-      .attr("class", "ytext")
-      .attr("x", w - margins.right)
-      .attr("y", h - 5)
-      .attr("text-anchor", "middle")
-      .text("% of women in science from total amount of researchers");
+    addText();
 
     // create dots for each datapoint
     let dots = svg.selectAll(".dot")
@@ -119,15 +100,17 @@ window.onload = function() {
         let newData = []
 
         // create new data array with specified objects to look at
-        data.forEach(function(entry) {
-          if (sort == entry.Country) {
-            newData.push(entry)
-          } else if (sort == entry.time) {
-            newData.push(entry)
-          }
-        });
-
-        console.log(newData) // heeft juiste aantal entries...
+        if (sort == "all") {
+          newData = data; // take all data points
+        } else {
+          data.forEach(function(entry) {
+            if (sort == entry.Country) {
+              newData.push(entry) // take all objects where countries match
+            } else if (sort == entry.time) {
+              newData.push(entry) // take all objects where time matches
+            }
+          })
+        }
 
         let xDomain = getDomain(newData, "conf");
         let yDomain = getDomain(newData, "women");
@@ -143,11 +126,17 @@ window.onload = function() {
           .domain(yDomain)
           .range(yRange);
 
-        var vis = d3.select("#scatterplot");
-        var new_dots = vis.selectAll("circle.dot") // Zou aan de lengte van deze kunnen liggen als vorige 3 is, zijn er maar 3 circle elementen
+        var new_dots = svg.selectAll("circle.dot") // Zou aan de lengte van deze kunnen liggen als vorige 3 is, zijn er maar 3 circle elementen
           .data(newData);
 
-        new_dots.exit().remove();
+        new_dots
+          .exit()
+          .transition()
+          .ease(d3.easeCircleIn)
+          .duration(500)
+          .attr("r", 0)
+          .remove();
+
         // create dots for each datapoint
         new_dots
           .enter().append("circle")
@@ -155,27 +144,32 @@ window.onload = function() {
           .merge(new_dots)
           .attr("fill", function(d, i) {
             c = d.Country;
-            console.log(d, c);
             c = c.split(" ");
             if (c[0] == "United") {
               c[0] = "UK";
             }
             return "rgb(" + countries[c[0]] + ")";
           })
+          .transition()
+          .ease(d3.easeCircleIn)
+          .duration(500)
           .attr("cx", d => newXScale(d.datapoint.conf))
           .attr("cy", d => yScale(d.datapoint.women))
           .attr("r", 9)
+
+          new_dots
           .on('mouseover', tool_tip.show)
-          .on('mouseout', tool_tip.hide);
+          .on('mouseout', tool_tip.hide)
 
         xAxis.call(d3.axisBottom(newXScale));
 
       });
 
+      addSource()
+
   }).catch(function(e) {
     throw (e);
   });
-
 
   // add the axes
   function getAxes() {
@@ -183,12 +177,10 @@ window.onload = function() {
     let xAxis = svg.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + h + ")")
-    // .call(d3.axisBottom(xScale));
 
     // add y-axis to the SVG with appropriate padding
     let yAxis = svg.append("g")
       .attr("class", "axis")
-    // .call(d3.axisLeft(yScale));
 
     return [xAxis, yAxis]
   }
@@ -253,10 +245,11 @@ window.onload = function() {
     return dataArray;
   }
 
-  // appends and svg to the body
+  // appends svg to the body
   function appendSVG() {
     // append svg element to body
     return d3.select(".chart").append("svg")
+      .attr("id", "svg")
       .attr("width", w + margins.left + margins.right)
       .attr("height", h + margins.top + margins.bottom)
       .append("g")
@@ -264,6 +257,7 @@ window.onload = function() {
       .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
   }
 
+  // adds legend to svg
   function appendLegend() {
     var legend = svg.selectAll(".legend")
       .data(Object.keys(countries))
@@ -290,6 +284,33 @@ window.onload = function() {
       });
   }
 
+  // add labels and title to graph
+  function addText() {
+    svg.append("text")
+      .attr("class", "xtext")
+      .attr("x", w - margins.right)
+      .attr("y", h - 5)
+      .attr("text-anchor", "middle")
+      .text("Consumer confidence");
+
+    svg.append("text")
+      .attr("class", "ytext")
+      .attr("x", -230)
+      .attr("y", -40)
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+        return "rotate(-90)"
+      })
+      .text("% of women in science from total amount of researchers");
+
+    svg.append("text")
+      .attr("class", "title")
+      .attr("x", w / 2)
+      .attr("y", -10)
+      .attr("text-anchor", "middle")
+      .text("% of women in science against consumer confidence per country")
+  }
+
   // gets the domain for required data
   function getDomain(array, value) {
     if (value == "women") {
@@ -301,4 +322,18 @@ window.onload = function() {
     }
   }
 
+  // add source text
+  function addSource() {
+    d3.select(".source").append("p")
+      .text("Sources: ")
+      .append("p")
+      .append("a")
+      .attr("href", "http://stats.oecd.org/SDMX-JSON/data/MSTI_PUB/TH_WRXRS.FRA+DEU+KOR+NLD+PRT+GBR/all?startTime=2007&endTime=2015")
+      .text("Women in science")
+
+    d3.select(".source").append("p")
+      .append("a")
+      .attr("href", "http://stats.oecd.org/SDMX-JSON/data/HH_DASH/FRA+DEU+KOR+NLD+PRT+GBR.COCONF.A/all?startTime=2007&endTime=2015")
+      .text("Consumer confidence")
+  }
 }

@@ -3,12 +3,27 @@ Matthew Finnegan, 10698485 */
 
 *{
   margin: 0px;
+  font-family: sans-serif;
 }
 header{
-  background-color: black;
+  background-color: #282c34;
   color: white;
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 10px;
 }
-.menus{
+footer{
+  background-color: #282c34;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 10px;
+}
+p{
+  text-align: center;
+  margin: 3px;
+}
+.menus, .source{
   text-align: center;
 }
 .dot{
@@ -19,7 +34,7 @@ header{
   stroke-width: 2px;
 }
 .chart{
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .d3-tip {
   line-height: 1;
@@ -31,7 +46,7 @@ header{
   }
 /* Dropdown Button */
 .dropbtn {
-   background-color: #4CAF50;
+   background-color: #282c34;
    color: white;
    padding: 16px;
    font-size: 16px;
@@ -65,4 +80,4 @@ header{
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {background-color: #6d6d6d;}

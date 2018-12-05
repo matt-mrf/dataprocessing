@@ -20,15 +20,6 @@ Matthew Finnegan, 10698485
     Scatterplot representing percentage of women in
     research of total researchers against consumer confidence in multiple countries
   </header>
-  <p>
-    Sources:
-  </p>
-  <p>
-    <a href="http://stats.oecd.org/SDMX-JSON/data/MSTI_PUB/TH_WRXRS.FRA+DEU+KOR+NLD+PRT+GBR/all?startTime=2007&endTime=2015">Women researchers</a>
-  </p>
-  <p>
-    <a href="http://stats.oecd.org/SDMX-JSON/data/HH_DASH/FRA+DEU+KOR+NLD+PRT+GBR.COCONF.A/all?startTime=2007&endTime=2015">Consumer confidence</a>
-  </p>
 
   <!-- Source for general dropdown menu:
        https://www.w3schools.com/howto/howto_css_dropdown.asp
@@ -37,6 +28,7 @@ Matthew Finnegan, 10698485
     <div class="dropdown">
       <button class="dropbtn">Show by country</button>
       <div class="dropdown-content">
+        <a class="m" value="all" href="#">Show all</a>
         <a class="m" value="France" href="#">France</a>
         <a class="m" value="Germany" href="#">Germany</a>
         <a class="m" value="Korea" href="#">Korea</a>
@@ -48,6 +40,7 @@ Matthew Finnegan, 10698485
     <div class="dropdown">
       <button class="dropbtn">Show by year</button>
       <div class="dropdown-content">
+        <a class="m" value="all" href="#">Show all</a>
         <a class="m" value="2007" href="#">2007</a>
         <a class="m" value="2008" href="#">2008</a>
         <a class="m" value="2009" href="#">2009</a>
@@ -61,8 +54,14 @@ Matthew Finnegan, 10698485
     </div>
   </div>
   <div class="chart">
-
   </div>
+
+  <div class="source">
+  </div>
+
+  <footer>
+    Matthew Finnegan -- Minor Programmeren -- UVA
+  </footer>
 </body>
 
 </html>
