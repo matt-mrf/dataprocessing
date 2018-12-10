@@ -4,7 +4,6 @@
 """
 This script converts a csv file with
 Toyota import numbers in Norway to json
-
 {
    2008: {
             Rav4: 206694
@@ -45,4 +44,4 @@ for k, v in data.items():
     data_list.append(temp_obj)
 
 with open(OUTPUT_JSON, 'w') as fp:
-    json.dump(data_list, fp)
+json.dump(data_list, fp)
