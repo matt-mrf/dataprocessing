@@ -1,0 +1,114 @@
+[{
+  "year": "2007",
+  "models": {
+    "Toyota Rav4": 4118,
+    "total": 18437,
+    "Toyota Avensis": 5621,
+    "Toyota Corolla": 2828,
+    "Toyota Yaris": 2939,
+    "Toyota Auris": 2931
+  }
+}, {
+  "year": "2008",
+  "models": {
+    "Toyota Rav4": 2166,
+    "total": 12503,
+    "Toyota Avensis": 3519,
+    "Toyota Auris": 3512,
+    "Toyota Corolla": 695,
+    "Toyota Prius": 477,
+    "Toyota Yaris": 2134
+  }
+}, {
+  "year": "2009",
+  "models": {
+    "Toyota Avensis": 4044,
+    "total": 9984,
+    "Toyota Prius": 1269,
+    "Toyota Auris": 2041,
+    "Toyota Yaris": 1646,
+    "Toyota Rav4": 420,
+    "Toyota Corolla": 126,
+    "Toyota Urban Cruiser": 438
+  }
+}, {
+  "year": "2010",
+  "models": {
+    "Toyota Prius": 2208,
+    "total": 12758,
+    "Toyota Avensis": 3921,
+    "Toyota Urban Cruiser": 1617,
+    "Toyota Auris": 2877,
+    "Toyota Yaris": 1020,
+    "Toyota Rav4": 1115
+  }
+}, {
+  "year": "2011",
+  "models": {
+    "Toyota Avensis": 3764,
+    "total": 9374,
+    "Toyota Auris": 3129,
+    "Toyota Rav4": 755,
+    "Toyota Prius": 248,
+    "Toyota Yaris": 1478
+  }
+}, {
+  "year": "2012",
+  "models": {
+    "Toyota Yaris": 3715,
+    "total": 12417,
+    "Toyota Avensis": 3726,
+    "Toyota Auris": 2555,
+    "Toyota Rav4": 1010,
+    "Toyota Prius": 1286,
+    "Toyota RAV4": 125
+  }
+}, {
+  "year": "2013",
+  "models": {
+    "Toyota Yaris": 4250,
+    "total": 15145,
+    "Toyota Prius": 1010,
+    "Toyota Avensis": 2175,
+    "Toyota Auris": 4649,
+    "Toyota Rav4": 2876,
+    "Toyota RAV4": 185
+  }
+}, {
+  "year": "2014",
+  "models": {
+    "Toyota Auris": 5385,
+    "total": 12890,
+    "Toyota Yaris": 3891,
+    "Toyota Rav4": 3614
+  }
+}, {
+  "year": "2015",
+  "models": {
+    "Toyota Rav4": 3755,
+    "total": 13153,
+    "Toyota Yaris": 4214,
+    "Toyota Auris": 4890,
+    "Toyota Prius": 171,
+    "Toyota Avensis": 123
+  }
+}, {
+  "year": "2016",
+  "models": {
+    "Toyota Rav4": 4955,
+    "total": 16653,
+    "Toyota Yaris": 4247,
+    "Toyota Auris": 4419,
+    "Toyota Avensis": 1047,
+    "Toyota Prius": 1985
+  }
+}, {
+  "year": "2017",
+  "models": {
+    "Toyota Rav4": 473,
+    "total": 1342,
+    "Toyota Yaris": 343,
+    "Toyota Auris": 280,
+    "Toyota C-HR": 246
+  }
+}]
