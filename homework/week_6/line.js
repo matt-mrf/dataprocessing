@@ -17,7 +17,7 @@ window.onload = function() {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  d3.json("data/data.json").then(function(data) {
+  d3.json("data/toyota.json").then(function(data) {
 
     var xDomain = d3.extent(data, d => d.year)
     var yDomain = d3.extent(data, d => d.models.total)

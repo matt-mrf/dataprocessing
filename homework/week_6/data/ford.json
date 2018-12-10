@@ -1,0 +1,85 @@
+[{
+  "year": "2007",
+  "models": {
+    "Ford Focus": 3038,
+    "total": 5976,
+    "Ford S-Max": 718,
+    "Ford Mondeo": 2220
+  }
+}, {
+  "year": "2008",
+  "models": {
+    "Ford Mondeo": 4745,
+    "total": 7622,
+    "Ford Focus": 2877
+  }
+}, {
+  "year": "2009",
+  "models": {
+    "Ford Focus": 2321,
+    "total": 5878,
+    "Ford Mondeo": 3466,
+    "Ford Fiesta": 91
+  }
+}, {
+  "year": "2010",
+  "models": {
+    "Ford Fiesta": 2611,
+    "total": 8413,
+    "Ford Mondeo": 3422,
+    "Ford Focus": 2380
+  }
+}, {
+  "year": "2011",
+  "models": {
+    "Ford Mondeo": 3207,
+    "total": 7644,
+    "Ford Focus": 4437
+  }
+}, {
+  "year": "2012",
+  "models": {
+    "Ford Focus": 4261,
+    "total": 6960,
+    "Ford Mondeo": 2445,
+    "Ford S-Max": 140,
+    "Ford Kuga": 114
+  }
+}, {
+  "year": "2013",
+  "models": {
+    "Ford Focus": 3169,
+    "total": 4594,
+    "Ford Kuga": 503,
+    "Ford Fiesta": 262,
+    "Ford Mondeo": 559,
+    "Ford S-Max": 101
+  }
+}, {
+  "year": "2014",
+  "models": {
+    "Ford Kuga": 152,
+    "total": 1819,
+    "Ford Focus": 1667
+  }
+}, {
+  "year": "2015",
+  "models": {
+    "Ford Kuga": 471,
+    "total": 5339,
+    "Ford Focus": 2012,
+    "Ford Mondeo": 2549,
+    "Ford Fiesta": 217,
+    "Ford S-Max": 90
+  }
+}, {
+  "year": "2016",
+  "models": {
+    "Ford Mondeo": 1257,
+    "total": 3518,
+    "Ford S-Max": 930,
+    "Ford Focus": 494,
+    "Ford Fiesta": 430,
+    "Ford Kuga": 407
+  }
+}]

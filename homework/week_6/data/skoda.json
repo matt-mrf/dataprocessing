@@ -1,0 +1,76 @@
+[{
+  "year": "2007",
+  "models": {
+    "Skoda Octavia": 3499,
+    "total": 3499
+  }
+}, {
+  "year": "2008",
+  "models": {
+    "Skoda Octavia": 2278,
+    "total": 2485,
+    "Skoda Fabia": 207
+  }
+}, {
+  "year": "2009",
+  "models": {
+    "Skoda Octavia": 2532,
+    "total": 2532
+  }
+}, {
+  "year": "2010",
+  "models": {
+    "Skoda Octavia": 3014,
+    "total": 3014
+  }
+}, {
+  "year": "2011",
+  "models": {
+    "Skoda Octavia": 3291,
+    "total": 3291
+  }
+}, {
+  "year": "2012",
+  "models": {
+    "Skoda Octavia": 2669,
+    "total": 2927,
+    "Skoda Superb": 258
+  }
+}, {
+  "year": "2013",
+  "models": {
+    "Skoda Octavia": 3444,
+    "total": 3748,
+    "Skoda Superb": 176,
+    "Skoda Yeti": 65,
+    "Skoda Rapid": 63
+  }
+}, {
+  "year": "2014",
+  "models": {
+    "Skoda Octavia": 4427,
+    "total": 4427
+  }
+}, {
+  "year": "2015",
+  "models": {
+    "Skoda Octavia": 4280,
+    "total": 4396,
+    "Skoda Superb": 116
+  }
+}, {
+  "year": "2016",
+  "models": {
+    "Skoda Octavia": 3795,
+    "total": 5941,
+    "Skoda Superb": 2012,
+    "Skoda Fabia": 134
+  }
+}, {
+  "year": "2017",
+  "models": {
+    "Skoda Octavia": 358,
+    "total": 563,
+    "Skoda Superb": 205
+  }
+}]

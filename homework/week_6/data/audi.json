@@ -1,0 +1,69 @@
+[{
+  "year": "2007",
+  "models": {
+    "Audi A4": 2369,
+    "total": 4136,
+    "Audi A3": 1767
+  }
+}, {
+  "year": "2008",
+  "models": {
+    "Audi A4": 3436,
+    "total": 4734,
+    "Audi A3": 1298
+  }
+}, {
+  "year": "2009",
+  "models": {
+    "Audi A4": 2175,
+    "total": 2175
+  }
+}, {
+  "year": "2010",
+  "models": {
+    "Audi A4": 2413,
+    "total": 2924,
+    "Audi A3": 511
+  }
+}, {
+  "year": "2011",
+  "models": {
+    "Audi A4": 1757,
+    "total": 1757
+  }
+}, {
+  "year": "2012",
+  "models": {
+    "Audi Q3": 159,
+    "total": 1122,
+    "Audi A4": 963
+  }
+}, {
+  "year": "2013",
+  "models": {
+    "Audi A4": 1953,
+    "total": 3373,
+    "Audi A3": 1361,
+    "Audi Q3": 59
+  }
+}, {
+  "year": "2014",
+  "models": {
+    "Audi A3": 2158,
+    "total": 2158
+  }
+}, {
+  "year": "2015",
+  "models": {
+    "Audi A3": 2776,
+    "total": 2776
+  }
+}, {
+  "year": "2016",
+  "models": {
+    "Audi A3": 3018,
+    "total": 3536,
+    "Audi A4": 387,
+    "Audi A6": 131
+  }
+}]

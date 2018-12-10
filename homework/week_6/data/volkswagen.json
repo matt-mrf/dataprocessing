@@ -1,0 +1,102 @@
+[{
+  "year": "2007",
+  "models": {
+    "Volkswagen Passat": 7194,
+    "total": 18162,
+    "Volkswagen Golf": 6076,
+    "Volkswagen Touran": 2602,
+    "Volkswagen Polo": 2290
+  }
+}, {
+  "year": "2008",
+  "models": {
+    "Volkswagen Golf": 5079,
+    "total": 12216,
+    "Volkswagen Passat": 4262,
+    "Volkswagen Tiguan": 2875
+  }
+}, {
+  "year": "2009",
+  "models": {
+    "Volkswagen Golf": 5401,
+    "total": 11051,
+    "Volkswagen Passat": 3210,
+    "Volkswagen Tiguan": 2440
+  }
+}, {
+  "year": "2010",
+  "models": {
+    "Volkswagen Golf": 8229,
+    "total": 16118,
+    "Volkswagen Polo": 3032,
+    "Volkswagen Passat": 3162,
+    "Volkswagen Tiguan": 1695
+  }
+}, {
+  "year": "2011",
+  "models": {
+    "Volkswagen Golf": 7370,
+    "total": 18223,
+    "Volkswagen Polo": 2980,
+    "Volkswagen Passat": 4608,
+    "Volkswagen Touran": 614,
+    "Volkswagen Tiguan": 2651
+  }
+}, {
+  "year": "2012",
+  "models": {
+    "Volkswagen Golf": 6313,
+    "total": 16560,
+    "Volkswagen Tiguan": 3879,
+    "Volkswagen Passat": 4148,
+    "Volkswagen Polo": 2012,
+    "Volkswagen up!": 208
+  }
+}, {
+  "year": "2013",
+  "models": {
+    "Volkswagen Golf": 7366,
+    "total": 14210,
+    "Volkswagen Tiguan": 2888,
+    "Volkswagen Passat": 2997,
+    "Volkswagen Polo": 449,
+    "Volkswagen up!": 510
+  }
+}, {
+  "year": "2014",
+  "models": {
+    "Volkswagen Golf": 9679,
+    "total": 18285,
+    "Volkswagen Tiguan": 2340,
+    "Volkswagen up!": 3807,
+    "Volkswagen Passat": 2459
+  }
+}, {
+  "year": "2015",
+  "models": {
+    "Volkswagen Golf": 16388,
+    "total": 22074,
+    "Volkswagen Passat": 3207,
+    "Volkswagen up!": 2039,
+    "Volkswagen Tiguan": 118,
+    "Volkswagen Polo": 322
+  }
+}, {
+  "year": "2016",
+  "models": {
+    "Volkswagen Golf": 13148,
+    "total": 22535,
+    "Volkswagen Passat": 4813,
+    "Volkswagen up!": 870,
+    "Volkswagen Polo": 1047,
+    "Volkswagen Touran": 130,
+    "Volkswagen Tiguan": 2527
+  }
+}, {
+  "year": "2017",
+  "models": {
+    "Volkswagen Golf": 738,
+    "total": 1253,
+    "Volkswagen Passat": 515
+  }
+}]
