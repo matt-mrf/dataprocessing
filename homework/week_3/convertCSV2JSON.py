@@ -23,4 +23,4 @@ with open(INPUT_CSV) as csvfile:
                 data[row["Year"]] = int(row["Quantity"])
 
 with open(OUTPUT_JSON, 'w') as fp:
-        json.dump(data, fp)
+    json.dump(data, fp)

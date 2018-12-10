@@ -1,0 +1,24 @@
+<!-- source for data:
+https://data.cdc.gov/NCHS/NCHS-Drug-Poisoning-Mortality-by-State-United-Stat/jx6g-fdh6/data
+ -->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <title>World's quality of life</title>
+  <script type="text/javascript" src="d3/d3.js"></script>
+  <script src="topojson/topojson.min.js"></script>
+  <script src="datamaps.world.min.js"></script>
+</head>
+
+<body>
+  <div id="container" style="position: relative; width: 500px; height: 300px;"></div>
+  <script>
+    var map = new Datamap({
+      element: document.getElementById('container')
+    });
+  </script>
+</body>
+
+</html>
