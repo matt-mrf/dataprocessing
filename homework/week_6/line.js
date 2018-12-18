@@ -416,4 +416,9 @@ window.onload = function() {
     return [xAxis, yAxis]
   }
 
+  d3.select("footer")
+  .append("p")
+  .append("a")
+  .attr("href", "https://data.cdc.gov/NCHS/NCHS-Drug-Poisoning-Mortality-by-State-United-Stat/jx6g-fdh6/data")
+  .text("Data source")
 }
