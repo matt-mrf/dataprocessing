@@ -1,0 +1,43 @@
+<!-- source for data:
+https://data.cdc.gov/NCHS/NCHS-Drug-Poisoning-Mortality-by-State-United-Stat/jx6g-fdh6/data
+ -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Toyota sales in Norway 2007 - 2017</title>
+  <link rel="stylesheet" type="text/css" href="style/line.css">
+  <script type="text/javascript" src="d3/d3.js"></script>
+  <script src="d3/d3-tip.js"></script>
+  <script type="text/javascript" src="line.js"></script>
+</head>
+
+<body>
+  <header>
+    Interactive linechart representing car sales in Norway, years 2007 through 2017
+  </header>
+
+  <div class="dropdown">
+    <button class="dropbtn">Choose brand</button>
+    <div class="dropdown-content">
+      <!-- <a class="m" value="all" href="#">Show all</a> -->
+      <a class="m" value="audi" href="#">Audi</a>
+      <a class="m" value="ford" href="#">Ford</a>
+      <a class="m" value="skoda" href="#">Skoda</a>
+      <a class="m" value="toyota" href="#">Toyota</a>
+      <a class="m" value="volkswagen" href="#">Volkswagen</a>
+    </div>
+  </div>
+
+  <div class="chart"></div>
+  <div class="linked">
+    <div id="pietip">
+      <span id="tt-name">Model: </span>
+      <br>
+      <span id="tt-amount">Amount sold: </span>
+    </div>
+  </div>
+</body>
+
+</html>
